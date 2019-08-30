@@ -48,19 +48,19 @@ body{
   line-height: 30px;
   font-size: 20px;
 }
-.button {
+a, .button {
   margin-top: 20px;
   background-color:  rgba(23,26,24,0.5);
   border: none;
   color: white;
-  padding: 15px 25px;
+  padding: 10px 20px;
   text-align: center;
   font-size: 17px;
   cursor: pointer;
   border-radius: 4px;
 }
 
-.button:hover {
+a, .button:hover {
   background-color:  rgba(23,26,24,0.8);
 }
 
@@ -69,6 +69,9 @@ a{
   text-decoration: none;
 }
 
+#intro a{
+  margin-top: 70px;
+}
 .box2{
   display: grid;
   grid-auto-columns: 1fr 1fr;
@@ -101,8 +104,28 @@ a{
 }
 
 .content {
+  display: grid;
+  grid-auto-columns: 1fr 1fr;
   padding: 0 18px;
   display: none;
-  /* overflow: hidden; */
+  overflow: hidden;
   background-color: #f1f1f1;
+}
+
+
+#rate {
+  font-size: 0;
+}
+#rate span {
+  font-size: 40px;
+}
+#rate span::before {
+  content: "☆";
+}
+#rate span.active::before {
+  content: "★";
+  color: yellow;
+}
+#rate span:hover {
+  cursor: pointer;
 }
