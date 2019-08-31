@@ -1,25 +1,29 @@
-*{
-  margin : 0;
+* {
+  margin: 0;
   padding: 0;
 }
-body{
-  background: rgba(23,26,24,0.5);
+
+body {
+  background: rgba(23, 26, 24, 0.5);
 }
+
 .header {
   width: 100%;
   height: 60px;
-  background:rgba(22, 22, 26, 0.781);
+  background: rgba(22, 22, 26, 0.781);
   font-family: Helvetica, sans-serif !important;
   text-align: center;
-  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
 }
-.header h1{
+
+.header h1 {
   position: relative;
   top: 13px;
   color: rgb(208, 208, 214);
   /* margin: 0 auto; */
 }
-.box1{
+
+.box1 {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -30,27 +34,32 @@ body{
   opacity: 1;
   filter: brightness(0.8);
   background: rgba(22, 22, 26, 0.781);
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
-.box1 #gambar{
+
+.box1 #gambar {
   /* margin : 0 0 0 90px; */
   padding: 0 0 0 30px;
 }
-.box1 #intro h1{
+
+.box1 #intro h1 {
   margin-bottom: 20px;
 }
-.box1 #intro{
+
+.box1 #intro {
   color: rgb(208, 208, 214);
-  width: 60% ;
+  width: 60%;
   margin: 30px;
   /* margin : 20px ;   */
   font-family: Helvetica, sans-serif;
   line-height: 30px;
   font-size: 20px;
 }
-a, .button {
+
+a,
+.button {
   margin-top: 20px;
-  background-color:  rgba(23,26,24,0.5);
+  background-color: rgba(23, 26, 24, 0.329);
   border: none;
   color: white;
   padding: 10px 20px;
@@ -60,31 +69,50 @@ a, .button {
   border-radius: 4px;
 }
 
-a, .button:hover {
-  background-color:  rgba(23,26,24,0.8);
+a,
+.button:hover {
+  background-color: rgba(23, 26, 24, 0.897);
 }
 
-a{
+a {
   color: inherit;
   text-decoration: none;
 }
 
-#intro a{
+#intro a {
   margin-top: 70px;
 }
-.box2{
+
+.box2 {
   display: grid;
   grid-auto-columns: 1fr 1fr;
   justify-content: space-around;
   align-items: center;
-  width: 90%;
-  /* height: 80%; */
+  width: 80%;
   padding: 20px;
   margin: 40 auto;
   opacity: 1;
   filter: brightness(0.8);
   background: rgba(22, 22, 26, 0.781);
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3);
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.box2 h2 {
+  width: 20%;
+  margin : 0 auto;
+  margin-top: 20px;
+  color: white;
+  background-color: rgba(23, 26, 24, 0.329);
+  font-family: Helvetica, sans-serif;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 17px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.box2 h2:hover {
+  background-color: rgba(23, 26, 24, 0.712);
 }
 
 .category {
@@ -93,39 +121,106 @@ a{
   cursor: pointer;
   padding: 18px;
   width: 100%;
-  border: none;
+  border: solid 0.5px #CFCED5;
   text-align: left;
   outline: none;
   font-size: 15px;
+  transition: 0.4s;
 }
 
-.active, .category:hover {
-  background-color: #555;
+.category:after {
+  content: "ᐯ";
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
 }
+
 
 .content {
-  display: grid;
-  grid-auto-columns: 1fr 1fr;
   padding: 0 18px;
-  display: none;
+  transition: max-height 0.2s ease-out;
+  max-height: 0;
   overflow: hidden;
   background-color: #f1f1f1;
 }
 
+#food,
+#restaurant,
+#server {
+  float: left;
+  font-size: 20px;
+  line-height: 25px;
+  margin-left: 50px;
+  padding: 10px;
+  font-family: Helvetica, sans-serif;
+}
+
+.rating {
+  float: right;
+  margin-right: 50px;
+  letter-spacing: 10px;
+  padding: 10px;
+}
 
 #rate {
   font-size: 0;
 }
+
 #rate span {
-  font-size: 40px;
+  font-size: 20px;
 }
+
 #rate span::before {
-  content: "☆";
+  content: "★";
+  color: #ccc;
 }
+
 #rate span.active::before {
   content: "★";
-  color: yellow;
+  color: #f8ce0b;
 }
+
 #rate span:hover {
   cursor: pointer;
+}
+
+.result{
+  display: none;
+}
+
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-outer::before {
+  content: "★ ★ ★ ★ ★";
+  font-size: 35px;
+  color: #ccc;
+}
+
+.stars-inner::before {
+  content: "★ ★ ★ ★ ★";
+  font-size: 35px;
+  color: #f8ce0b;
+}
+.result{
+  text-align: center;
+}
+#score{
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-size: 35px;
+  color:white;
 }

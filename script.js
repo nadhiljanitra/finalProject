@@ -2,9 +2,10 @@ var head = document.querySelector(".header");
 var title = document.createElement("h1");
 title.innerHTML = "Uncle Joe Feedback Site";
 head.appendChild(title);
-
+var isi = document.querySelector(".isi")
+var result = document.querySelector(".result")
 var list = {
-  food: ["Taste", "Variety of Menu", "Platting", "Price", "hygine"],
+  food: ["Taste", "Variety of Menu", "Platting", "Price"],
   restaurant: ["Sanitation", "Ambience", "Facility", "Access Location"],
   server: [
     "Attentive and Quick",
@@ -39,10 +40,8 @@ for (key in list) {
   }
 }
 var rate = document.getElementsByClassName("rating");
-console.log(rate);
 for (i = 0; i < rate.length; i++) {
   var sibling = rate[i].previousElementSibling;
-  console.log(sibling.children);
   for (j = 0; j < sibling.children.length; j++) {
     var eachRate = document.createElement("div");
     eachRate.setAttribute("id", "rate");
@@ -51,8 +50,8 @@ for (i = 0; i < rate.length; i++) {
 }
 var sRate = document.querySelectorAll("#rate");
 var test = Array.from(sRate);
-console.log(sRate);
-console.log(test);
+var nilai = [];
+var jumlah = 0
 for (i = 0; i < test.length; i++) {
   for (j = 1; j < 6; j++) {
     var star = document.createElement("span");
@@ -66,37 +65,67 @@ for (i = 0; i < test.length; i++) {
       if (span === e.target) {
         action = "remove";
       }
-      var val = document.querySelector("span").getAttribute("value");
-      console.log(val);
     }
-    console.log(e.target.getAttribute("value"));
+    // console.log(parseInt(e.target.getAttribute("value")));
+    nilai.push(parseInt(e.target.getAttribute("value")))
+    
   });
 }
+var h2 = document.getElementsByTagName("h2")
+h2[0].addEventListener("click",function(){
+  if (nilai.length<1){
+    alert("input your feedback please")
+    return false;
+  }
+  var jumlah = 0
+  for (i=0;i<nilai.length;i++){
+    jumlah = jumlah + nilai[i]
+  }
+  finalScore(jumlah)
+  isi.style.display = "none"
+  result.style.display = "initial"
+  console.log(nilai);
+})
 
+function finalScore(jumlah){
+  var nilaiMaks = 5;
+  var rerata = jumlah/test.length
+  var nilaiAkhir = Math.round(rerata*10)/10
+  var rerataPersenRounded = `${Math.round((rerata/nilaiMaks)*100)}%`
+  document.querySelector(".stars-inner").style.width = rerataPersenRounded;
+  var score = document.createElement("div")
+  score.setAttribute("id","score")
+  score.innerHTML = nilaiAkhir+ " / 5"
+  document.getElementsByClassName("box2")[0].appendChild(score)
+}
 
-// var bintangSatuan = createElement("span")
-// before = rate[0].previousElementSibling;
-// console.log(before)
 
 var coll = document.querySelectorAll(".category");
 for (var i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
     } else {
-      content.style.display = "block";
+      content.style.maxHeight = content.scrollHeight + "px";
     }
   });
 }
+var kotak2 = document.getElementsByClassName("content");
+var form = document.createElement("form");
+var pesan = document.createElement("textarea");
+kotak2[3].appendChild(form);
+form.appendChild(pesan);
 
-// var intro = document.querySelector("#intro");
-// var button = document.createElement("button");
-// button.setAttribute("class", "button");
-// intro.appendChild(button);
-// var jump1 = document.createElement("a");
-// jump1.innerHTML = "Start the survey";
-// jump1.setAttribute("href", "/index2.html");
-// jump1.setAttribute("target", "_blank");
-// button.appendChild(jump1);
+var starOut = document.createElement("div")
+starOut.setAttribute("class","stars-outer")
+var starIn = document.createElement("div")
+starIn.setAttribute("class","stars-inner")
+starOut.appendChild(starIn)
+var result = document.createElement("div")
+result.setAttribute("class","result")
+result.appendChild(starOut)
+document.getElementsByClassName("box2")[0].appendChild(result)
+
+
