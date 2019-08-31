@@ -2,19 +2,20 @@ var head = document.querySelector(".header");
 var title = document.createElement("h1");
 title.innerHTML = "Uncle Joe Feedback Site";
 head.appendChild(title);
-var isi = document.querySelector(".isi")
-var result = document.querySelector(".result")
+var isi = document.querySelector(".isi");
+var result = document.querySelector(".result");
 var list = {
-  food: ["Taste", "Variety of Menu", "Platting", "Price"],
+  food: ["Taste", "Variety of Menu", "Platting"],
   restaurant: ["Sanitation", "Ambience", "Facility", "Access Location"],
   server: [
     "Attentive and Quick",
-    "Knowledgable and Quick",
-    "knowledgeable and courteous",
+    "Coordinated With Timing of Meals",
+    "Knowledgeable and Courteous",
     "Attitude and Friendly"
   ]
 };
 
+// Create list of feedback
 for (key in list) {
   if (key == "food") {
     var f = document.querySelector("#food");
@@ -39,6 +40,8 @@ for (key in list) {
     }
   }
 }
+
+// Create stars (Ratings)
 var rate = document.getElementsByClassName("rating");
 for (i = 0; i < rate.length; i++) {
   var sibling = rate[i].previousElementSibling;
@@ -51,7 +54,7 @@ for (i = 0; i < rate.length; i++) {
 var sRate = document.querySelectorAll("#rate");
 var test = Array.from(sRate);
 var nilai = [];
-var jumlah = 0
+var jumlah = 0;
 for (i = 0; i < test.length; i++) {
   for (j = 1; j < 6; j++) {
     var star = document.createElement("span");
@@ -66,40 +69,11 @@ for (i = 0; i < test.length; i++) {
         action = "remove";
       }
     }
-    // console.log(parseInt(e.target.getAttribute("value")));
-    nilai.push(parseInt(e.target.getAttribute("value")))
-    
+    nilai.push(parseInt(e.target.getAttribute("value")));
   });
 }
-var h2 = document.getElementsByTagName("h2")
-h2[0].addEventListener("click",function(){
-  if (nilai.length<1){
-    alert("input your feedback please")
-    return false;
-  }
-  var jumlah = 0
-  for (i=0;i<nilai.length;i++){
-    jumlah = jumlah + nilai[i]
-  }
-  finalScore(jumlah)
-  isi.style.display = "none"
-  result.style.display = "initial"
-  console.log(nilai);
-})
 
-function finalScore(jumlah){
-  var nilaiMaks = 5;
-  var rerata = jumlah/test.length
-  var nilaiAkhir = Math.round(rerata*10)/10
-  var rerataPersenRounded = `${Math.round((rerata/nilaiMaks)*100)}%`
-  document.querySelector(".stars-inner").style.width = rerataPersenRounded;
-  var score = document.createElement("div")
-  score.setAttribute("id","score")
-  score.innerHTML = nilaiAkhir+ " / 5"
-  document.getElementsByClassName("box2")[0].appendChild(score)
-}
-
-
+// Accordions
 var coll = document.querySelectorAll(".category");
 for (var i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
@@ -112,20 +86,53 @@ for (var i = 0; i < coll.length; i++) {
     }
   });
 }
-var kotak2 = document.getElementsByClassName("content");
-var form = document.createElement("form");
-var pesan = document.createElement("textarea");
-kotak2[3].appendChild(form);
-form.appendChild(pesan);
 
-var starOut = document.createElement("div")
-starOut.setAttribute("class","stars-outer")
-var starIn = document.createElement("div")
-starIn.setAttribute("class","stars-inner")
-starOut.appendChild(starIn)
-var result = document.createElement("div")
-result.setAttribute("class","result")
-result.appendChild(starOut)
-document.getElementsByClassName("box2")[0].appendChild(result)
+// Create submit feedback and jump into result
+var h2 = document.getElementsByTagName("h2");
+h2[0].addEventListener("click", function() {
+  if (nilai.length < 1) {
+    alert("input your feedback please");
+    return false;
+  }
+  var jumlah = 0;
+  for (i = 0; i < nilai.length; i++) {
+    jumlah = jumlah + nilai[i];
+  }
 
+  // bintang
+  var starOut = document.createElement("div");
+  starOut.setAttribute("class", "stars-outer");
+  var starIn = document.createElement("div");
+  starIn.setAttribute("class", "stars-inner");
+  starOut.appendChild(starIn);
+  var result = document.createElement("div");
+  result.setAttribute("class", "result");
+  var h1 = document.createElement("h1");
+  h1.innerHTML = "Your Feedback Result :";
+  result.appendChild(h1);
+  result.appendChild(starOut);
+  document.getElementsByClassName("box2")[0].appendChild(result);
+
+  // finalScore
+  var nilaiMaks = 5;
+  var rerata = jumlah / test.length;
+  var nilaiAkhir = Math.round(rerata * 10) / 10;
+  var rerataPersenRounded = `${Math.round((rerata / nilaiMaks) * 100)}%`;
+  document.querySelector(".stars-inner").style.width = rerataPersenRounded;
+  var text = document.createElement("h3");
+  text.innerHTML = nilaiAkhir + " / 5";
+  result.appendChild(text);
+
+  // thankYouNotes
+  var notes = document.createElement("div");
+  notes.setAttribute("id", "notes");
+  var p = document.createElement("p");
+  p.innerHTML =
+    "Thank you for the feedback on your experience with our restaurant. We sincerely appreciate your insight because it helps us build a better improvement.<br>If you have any more questions, comments or concern or compliments, please feel welcome to reach back out as we would be more than happy to assist.<br><br>Best,<br><br>Uncle Joe.";
+  notes.appendChild(p);
+  result.appendChild(notes);
+
+  isi.style.display = "none";
+  result.style.display = "initial";
+});
 
